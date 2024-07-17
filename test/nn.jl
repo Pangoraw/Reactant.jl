@@ -2,6 +2,7 @@
 
 using Reactant
 using Flux
+using Flux.NNlib
 using Test
 # Generate some data for the XOR problem: vectors of length 2, as columns of a matrix:
 noisy = rand(Float32, 2, 1000)                                    # 2×1000 Matrix{Float32}
@@ -69,3 +70,16 @@ optim # parameters, momenta and output have all changed
 out2 = model(noisy)  # first row is prob. of true, second row p(false)
 
 mean((out2[1, :] .> 0.5) .== truth)  # accuracy 94% so far!
+
+@testset "NNlib.conv" begin
+    W = randn(Float32, 10, 10, 3, 1)
+    x = randn(Float32, 64, 64, 3, 2)
+
+    cW, cx = (W, x) .|> Reactant.ConcreteRArray
+    cconv = Reactant.compile(NNlib.conv, (cx, cW))
+
+    out = NNlib.conv(x, W)
+    cout = cconv(cx, cW)
+
+    @test out ≈ cout
+end
