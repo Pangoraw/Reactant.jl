@@ -60,7 +60,7 @@ function NNlib.conv(
 
     in1, in2 = in1.mlir_data, in2.mlir_data
     if !NNlib.flipkernel(cdims)
-        rev = Reactant.MLIR.Dialects.stablehlo.reverse(in2; dimensions=[1,0])
+        rev = Reactant.MLIR.Dialects.stablehlo.reverse(in2; dimensions=[1, 0])
         in2 = Reactant.MLIR.IR.result(rev, 1)
     end
 
@@ -68,7 +68,8 @@ function NNlib.conv(
         (),
         Reactant.MLIR.IR.result(
             Reactant.MLIR.Dialects.stablehlo.convolution(
-                in1, in2;
+                in1,
+                in2;
                 result_0=output_type,
                 dimension_numbers=parse(
                     Reactant.MLIR.IR.Attribute,
@@ -88,7 +89,8 @@ function NNlib.conv(
                 ),
                 rhs_dilation,
                 lhs_dilation,
-                padding, window_strides,
+                padding,
+                window_strides,
                 feature_group_count=1,
                 batch_group_count=1,
             ),
