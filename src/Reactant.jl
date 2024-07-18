@@ -1325,4 +1325,32 @@ function set_default_backend(backend::String)
     return XLA.default_backend[] = backend
 end
 
+function einsum(
+    a::TracedRArray{T,Shape1,N1}, b::TracedRArray{T, Shape2, N2}, patt
+) where {T,Shape1,Shape2,N1,N2}
+    in, out = if contains(patt, "->")
+        strip.(split(patt, "->"))
+    else
+        in_a, in_b = strip.(split(patt, ','))
+        patt, filter(∉(in_b), in_a) * filter(∉(in_a), in_b)
+    end
+    in_a, in_b = strip.(split(in, ','))
+
+    out_shape = Tuple(map(collect(out)) do c
+        I = findfirst(==(c), in_a)
+        if isnothing(I)
+            Shape2[findfirst(==(c), in_b)]
+        else
+            Shape1[I]
+        end
+    end)
+    out_type = MLIR.IR.TensorType(out_shape, MLIR.IR.Type(T))
+
+    einsum_op = MLIR.Dialects.stablehlo.einsum(
+        a.mlir_data, b.mlir_data; result_0=out_type, einsum_config=patt
+    )
+
+    return TracedRArray{T,out_shape,length(out_shape)}((), MLIR.IR.result(einsum_op, 1))
+end
+
 end # module
