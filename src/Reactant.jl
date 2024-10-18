@@ -1174,7 +1174,7 @@ function run_pass_pipeline!(mod, pass_pipeline)
     pm = MLIR.IR.PassManager()
     opm = MLIR.IR.OpPassManager(pm)
     MLIR.IR.add_pipeline!(opm, pass_pipeline)
-    MLIR.IR.run!(pm, mod)
+    return MLIR.IR.run!(pm, mod)
 end
 
 function compile_to_module(mod, f, args; optimize=true)
