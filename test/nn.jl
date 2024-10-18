@@ -75,7 +75,7 @@ mean((out2[1, :] .> 0.5) .== truth)  # accuracy 94% so far!
     W = randn(Float32, 10, 10, 3, 1)
     x = randn(Float32, 64, 64, 3, 2)
 
-    cW, cx = (W, x) .|> Reactant.ConcreteRArray
+    cW, cx = Reactant.ConcreteRArray.((W, x))
     cconv = Reactant.compile(NNlib.conv, (cx, cW))
 
     out = NNlib.conv(x, W)
