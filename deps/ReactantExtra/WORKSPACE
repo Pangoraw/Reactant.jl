@@ -9,14 +9,14 @@ http_archive(
     urls = ["https://github.com/wsmoses/nsync/archive/{commit}.tar.gz".format(commit = NSYNC_COMMIT)],
 )
 
-ENZYMEXLA_COMMIT = "ed9bb9c77fbe512e8f7b9c0279dc5243a3de829f"
+ENZYMEXLA_COMMIT = "c555a04234c245070d7d1dac300b60bf878f2c7a"
 ENZYMEXLA_SHA256 = ""
 
 http_archive(
     name = "enzyme_ad",
     sha256 = ENZYMEXLA_SHA256,
     strip_prefix = "Enzyme-JAX-" + ENZYMEXLA_COMMIT,
-    urls = ["https://github.com/EnzymeAD/Enzyme-JAX/archive/{commit}.tar.gz".format(commit = ENZYMEXLA_COMMIT)],
+    urls = ["https://github.com/Pangoraw/Enzyme-JAX/archive/{commit}.tar.gz".format(commit = ENZYMEXLA_COMMIT)],
 )
 
 
