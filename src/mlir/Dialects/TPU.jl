@@ -23,7 +23,7 @@ function all_reduce(
     attributes = NamedAttribute[namedattribute("dim", dim), namedattribute("kind", kind)]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "tpu.all_reduce",
         location;
         operands,
@@ -42,7 +42,7 @@ function sem_alloc(; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.sem_alloc",
         location;
         operands,
@@ -61,7 +61,7 @@ function assume_layout(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.assume_layout",
         location;
         operands,
@@ -83,7 +83,7 @@ function assume_multiple(
     attributes = NamedAttribute[namedattribute("multiple", multiple),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tpu.assume_multiple",
         location;
         operands,
@@ -102,7 +102,7 @@ function bitcast(input::Value; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.bitcast",
         location;
         operands,
@@ -121,7 +121,7 @@ function bitcast_vreg(input::Value; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.bitcast_vreg",
         location;
         operands,
@@ -147,7 +147,7 @@ function broadcast_in_sublanes(source::Value; output::IR.Type, lane, location=Lo
     successors = Block[]
     attributes = NamedAttribute[namedattribute("lane", lane),]
 
-    return create_operation(
+    create_operation(
         "tpu.broadcast_in_sublanes",
         location;
         operands,
@@ -168,7 +168,7 @@ function concatenate(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("dimension", dimension),]
 
-    return create_operation(
+    create_operation(
         "tpu.concatenate",
         location;
         operands,
@@ -189,7 +189,7 @@ function create_mask(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.create_mask",
         location;
         operands,
@@ -236,7 +236,7 @@ function create_subelement_mask(; output::IR.Type, from, to, location=Location()
     successors = Block[]
     attributes = NamedAttribute[namedattribute("from", from), namedattribute("to", to)]
 
-    return create_operation(
+    create_operation(
         "tpu.create_subelement_mask",
         location;
         operands,
@@ -255,7 +255,7 @@ function delay(nanos::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.delay",
         location;
         operands,
@@ -275,7 +275,7 @@ function device_id(; result=nothing::Union{Nothing,IR.Type}, location=Location()
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tpu.device_id",
         location;
         operands,
@@ -296,7 +296,7 @@ function dynamic_gather(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("dimension", dimension),]
 
-    return create_operation(
+    create_operation(
         "tpu.dynamic_gather",
         location;
         operands,
@@ -326,7 +326,7 @@ function dynamic_rotate(
     !isnothing(stride_dimension) &&
         push!(attributes, namedattribute("stride_dimension", stride_dimension))
 
-    return create_operation(
+    create_operation(
         "tpu.dynamic_rotate",
         location;
         operands,
@@ -359,11 +359,11 @@ function enqueue_dma(
         attributes,
         operandsegmentsizes([
             1,
-            (source_semaphore == nothing) ? 0 : 11,
+            (source_semaphore==nothing) ? 0 : 11,
             1,
-            if (device_id == nothing)
+            if (device_id==nothing)
                 0
-            elseif 1(core_id == nothing)
+            elseif 1(core_id==nothing)
                 0
             else
                 1
@@ -371,7 +371,7 @@ function enqueue_dma(
         ]),
     )
 
-    return create_operation(
+    create_operation(
         "tpu.enqueue_dma",
         location;
         operands,
@@ -390,7 +390,7 @@ function erase_memref_layout(operand::Value; result::IR.Type, location=Location(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.erase_memref_layout",
         location;
         operands,
@@ -409,7 +409,7 @@ function fptosi(input::Value; output::IR.Type, rounding_mode, location=Location(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("rounding_mode", rounding_mode),]
 
-    return create_operation(
+    create_operation(
         "tpu.fptosi",
         location;
         operands,
@@ -430,7 +430,7 @@ function gather(source::Value; output::IR.Type, indices, dimension, location=Loc
         namedattribute("indices", indices), namedattribute("dimension", dimension)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.gather",
         location;
         operands,
@@ -449,7 +449,7 @@ function sem_barrier(; semaphore::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.sem_barrier",
         location;
         operands,
@@ -468,7 +468,7 @@ function internal_scratch(; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.internal_scratch",
         location;
         operands,
@@ -488,7 +488,7 @@ function iteration_bound(; result=nothing::Union{Nothing,IR.Type}, dim, location
     attributes = NamedAttribute[namedattribute("dim", dim),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tpu.iteration_bound",
         location;
         operands,
@@ -508,7 +508,7 @@ function iota(; output::IR.Type, dimension=nothing, location=Location())
     attributes = NamedAttribute[]
     !isnothing(dimension) && push!(attributes, namedattribute("dimension", dimension))
 
-    return create_operation(
+    create_operation(
         "tpu.iota",
         location;
         operands,
@@ -536,7 +536,7 @@ function load(
     !isnothing(sublane_stride) &&
         push!(attributes, namedattribute("sublane_stride", sublane_stride))
 
-    return create_operation(
+    create_operation(
         "tpu.load",
         location;
         operands,
@@ -555,7 +555,7 @@ function log_buffer(input::Value; shape, tag, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("shape", shape), namedattribute("tag", tag)]
 
-    return create_operation(
+    create_operation(
         "tpu.log_buffer",
         location;
         operands,
@@ -575,7 +575,7 @@ function log(inputs::Vector{Value}; tag, formatted=nothing, location=Location())
     attributes = NamedAttribute[namedattribute("tag", tag),]
     !isnothing(formatted) && push!(attributes, namedattribute("formatted", formatted))
 
-    return create_operation(
+    create_operation(
         "tpu.log",
         location;
         operands,
@@ -594,7 +594,7 @@ function mask_cast(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.mask_cast",
         location;
         operands,
@@ -630,7 +630,7 @@ function matmul(
     !isnothing(dimension_numbers) &&
         push!(attributes, namedattribute("dimension_numbers", dimension_numbers))
 
-    return create_operation(
+    create_operation(
         "tpu.matmul",
         location;
         operands,
@@ -649,7 +649,7 @@ function memref_bitcast(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.memref_bitcast",
         location;
         operands,
@@ -668,7 +668,7 @@ function memref_reshape(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.memref_reshape",
         location;
         operands,
@@ -694,7 +694,7 @@ function memref_slice(
     attributes = NamedAttribute[]
     push!(attributes, operandsegmentsizes([1, length(base_idx), length(dynamic_sizes)]))
 
-    return create_operation(
+    create_operation(
         "tpu.memref_slice",
         location;
         operands,
@@ -713,7 +713,7 @@ function memref_squeeze(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.memref_squeeze",
         location;
         operands,
@@ -732,7 +732,7 @@ function prng_random_bits(; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.prng_random_bits",
         location;
         operands,
@@ -751,7 +751,7 @@ function prng_set_seed_32(seeds::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.prng_set_seed_32",
         location;
         operands,
@@ -770,7 +770,7 @@ function pack_vmsk(low::Value, high::Value; output::IR.Type, location=Location()
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.pack_vmsk",
         location;
         operands,
@@ -793,7 +793,7 @@ function pack_subelements(
         namedattribute("positions", positions), namedattribute("pack_format", pack_format)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.pack_subelements",
         location;
         operands,
@@ -819,7 +819,7 @@ function reciprocal(
     !isnothing(output) && push!(op_ty_results, output)
     !isnothing(approx) && push!(attributes, namedattribute("approx", approx))
 
-    return create_operation(
+    create_operation(
         "tpu.reciprocal",
         location;
         operands,
@@ -838,7 +838,7 @@ function region(; results::Vector{IR.Type}, region::Region, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.region",
         location;
         operands,
@@ -857,7 +857,7 @@ function reinterpret_cast(input::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.reinterpret_cast",
         location;
         operands,
@@ -877,7 +877,7 @@ function relayout(input::Value; output=nothing::Union{Nothing,IR.Type}, location
     attributes = NamedAttribute[]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "tpu.relayout",
         location;
         operands,
@@ -898,7 +898,7 @@ function repeat(source::Value; output::IR.Type, dimension, times, location=Locat
         namedattribute("dimension", dimension), namedattribute("times", times)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.repeat",
         location;
         operands,
@@ -917,7 +917,7 @@ function roll_vectors(input::Vector{Value}; output::IR.Type, location=Location()
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.roll_vectors",
         location;
         operands,
@@ -950,7 +950,7 @@ function rotate(
     !isnothing(stride_dimension) &&
         push!(attributes, namedattribute("stride_dimension", stride_dimension))
 
-    return create_operation(
+    create_operation(
         "tpu.rotate",
         location;
         operands,
@@ -972,7 +972,7 @@ function sem_read(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tpu.sem_read",
         location;
         operands,
@@ -1002,9 +1002,9 @@ function sem_signal(
     push!(attributes, operandsegmentsizes([
         1,
         1,
-        if (device_id == nothing)
+        if (device_id==nothing)
             0
-        elseif 1(core_id == nothing)
+        elseif 1(core_id==nothing)
             0
         else
             1
@@ -1012,7 +1012,7 @@ function sem_signal(
     ]))
     !isnothing(core_type) && push!(attributes, namedattribute("core_type", core_type))
 
-    return create_operation(
+    create_operation(
         "tpu.sem_signal",
         location;
         operands,
@@ -1031,7 +1031,7 @@ function sem_wait(semaphore::Value, amount::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.sem_wait",
         location;
         operands,
@@ -1060,7 +1060,7 @@ function shuffled_load(
         namedattribute("sublane_offsets", sublane_offsets),
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.shuffled_load",
         location;
         operands,
@@ -1089,7 +1089,7 @@ function shuffled_store(
         namedattribute("sublane_offsets", sublane_offsets),
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.shuffled_store",
         location;
         operands,
@@ -1116,13 +1116,11 @@ function store(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("sublane_mask", sublane_mask),]
     !isnothing(mask) && push!(operands, mask)
-    push!(
-        attributes, operandsegmentsizes([1, 1, length(indices), (mask == nothing) ? 0 : 1])
-    )
+    push!(attributes, operandsegmentsizes([1, 1, length(indices), (mask==nothing) ? 0 : 1]))
     !isnothing(sublane_stride) &&
         push!(attributes, namedattribute("sublane_stride", sublane_stride))
 
-    return create_operation(
+    create_operation(
         "tpu.store",
         location;
         operands,
@@ -1143,7 +1141,7 @@ function strided_load(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("strides", strides),]
 
-    return create_operation(
+    create_operation(
         "tpu.strided_load",
         location;
         operands,
@@ -1164,7 +1162,7 @@ function strided_store(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("strides", strides),]
 
-    return create_operation(
+    create_operation(
         "tpu.strided_store",
         location;
         operands,
@@ -1187,7 +1185,7 @@ function trace(;
         namedattribute("message", message), namedattribute("level", level)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.trace",
         location;
         operands,
@@ -1208,7 +1206,7 @@ function trace_start(; message, level, location=Location())
         namedattribute("message", message), namedattribute("level", level)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.trace_start",
         location;
         operands,
@@ -1227,7 +1225,7 @@ function trace_stop(; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.trace_stop",
         location;
         operands,
@@ -1250,7 +1248,7 @@ function unpack_subelements(
         namedattribute("index", index), namedattribute("pack_format", pack_format)
     ]
 
-    return create_operation(
+    create_operation(
         "tpu.unpack_subelements",
         location;
         operands,
@@ -1269,7 +1267,7 @@ function unroll_vectors(input::Value; output::Vector{IR.Type}, location=Location
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.unroll_vectors",
         location;
         operands,
@@ -1295,11 +1293,9 @@ function vector_store(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("strides", strides),]
     !isnothing(mask) && push!(operands, mask)
-    push!(
-        attributes, operandsegmentsizes([1, 1, length(indices), (mask == nothing) ? 0 : 1])
-    )
+    push!(attributes, operandsegmentsizes([1, 1, length(indices), (mask==nothing) ? 0 : 1]))
 
-    return create_operation(
+    create_operation(
         "tpu.vector_store",
         location;
         operands,
@@ -1318,7 +1314,7 @@ function wait_dma2(semaphore::Value, src::Value, dst::Value; location=Location()
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.wait_dma2",
         location;
         operands,
@@ -1337,7 +1333,7 @@ function wait_dma(semaphore::Value, ref::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.wait_dma",
         location;
         operands,
@@ -1356,7 +1352,7 @@ function weird(input::Value; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.weird",
         location;
         operands,
@@ -1375,7 +1371,7 @@ function yield(results::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tpu.yield",
         location;
         operands,

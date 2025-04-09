@@ -58,7 +58,7 @@ function all_reduce(
     !isnothing(op) && push!(attributes, namedattribute("op", op))
     !isnothing(uniform) && push!(attributes, namedattribute("uniform", uniform))
 
-    return create_operation(
+    create_operation(
         "gpu.all_reduce",
         location;
         operands,
@@ -115,7 +115,7 @@ function alloc(
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
     !isnothing(hostShared) && push!(attributes, namedattribute("hostShared", hostShared))
 
-    return create_operation(
+    create_operation(
         "gpu.alloc",
         location;
         operands,
@@ -153,7 +153,7 @@ function barrier(; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.barrier",
         location;
         operands,
@@ -202,7 +202,7 @@ function binary(; sym_name, offloadingHandler=nothing, objects, location=Locatio
     !isnothing(offloadingHandler) &&
         push!(attributes, namedattribute("offloadingHandler", offloadingHandler))
 
-    return create_operation(
+    create_operation(
         "gpu.binary",
         location;
         operands,
@@ -253,7 +253,7 @@ function block_dim(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.block_dim",
         location;
         operands,
@@ -298,7 +298,7 @@ function block_id(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.block_id",
         location;
         operands,
@@ -341,7 +341,7 @@ function cluster_block_id(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.cluster_block_id",
         location;
         operands,
@@ -385,7 +385,7 @@ function cluster_dim_blocks(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.cluster_dim_blocks",
         location;
         operands,
@@ -429,7 +429,7 @@ function cluster_dim(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.cluster_dim",
         location;
         operands,
@@ -473,7 +473,7 @@ function cluster_id(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.cluster_id",
         location;
         operands,
@@ -522,7 +522,7 @@ function create_2to4_spmat(
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
     !isnothing(pruneFlag) && push!(attributes, namedattribute("pruneFlag", pruneFlag))
 
-    return create_operation(
+    create_operation(
         "gpu.create_2to4_spmat",
         location;
         operands,
@@ -591,7 +591,7 @@ function create_bsr(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_bsr",
         location;
         operands,
@@ -643,7 +643,7 @@ function create_coo_aos(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_coo_aos",
         location;
         operands,
@@ -694,7 +694,7 @@ function create_coo(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_coo",
         location;
         operands,
@@ -748,7 +748,7 @@ function create_csc(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_csc",
         location;
         operands,
@@ -802,7 +802,7 @@ function create_csr(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_csr",
         location;
         operands,
@@ -848,7 +848,7 @@ function create_dn_tensor(
     push!(attributes, operandsegmentsizes([length(asyncDependencies), 1, length(dims)]))
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.create_dn_tensor",
         location;
         operands,
@@ -893,7 +893,7 @@ function dealloc(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.dealloc",
         location;
         operands,
@@ -935,7 +935,7 @@ function destroy_dn_tensor(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.destroy_dn_tensor",
         location;
         operands,
@@ -977,7 +977,7 @@ function destroy_sp_mat(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.destroy_sp_mat",
         location;
         operands,
@@ -1014,7 +1014,7 @@ function dynamic_shared_memory(; resultMemref::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.dynamic_shared_memory",
         location;
         operands,
@@ -1122,7 +1122,7 @@ function func(;
     !isnothing(known_grid_size) &&
         push!(attributes, namedattribute("known_grid_size", known_grid_size))
 
-    return create_operation(
+    create_operation(
         "gpu.func",
         location;
         operands,
@@ -1189,7 +1189,7 @@ function module_(;
     !isnothing(offloadingHandler) &&
         push!(attributes, namedattribute("offloadingHandler", offloadingHandler))
 
-    return create_operation(
+    create_operation(
         "gpu.module",
         location;
         operands,
@@ -1233,7 +1233,7 @@ function global_id(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.global_id",
         location;
         operands,
@@ -1285,7 +1285,7 @@ function grid_dim(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.grid_dim",
         location;
         operands,
@@ -1316,7 +1316,7 @@ function host_register(value::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.host_register",
         location;
         operands,
@@ -1343,7 +1343,7 @@ function host_unregister(value::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.host_unregister",
         location;
         operands,
@@ -1381,7 +1381,7 @@ function lane_id(;
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.lane_id",
         location;
         operands,
@@ -1537,23 +1537,23 @@ function launch_func(
             1,
             1,
             1,
-            if (clusterSizeX == nothing)
+            if (clusterSizeX==nothing)
                 0
-            elseif 1(clusterSizeY == nothing)
+            elseif 1(clusterSizeY==nothing)
                 0
-            elseif 1(clusterSizeZ == nothing)
+            elseif 1(clusterSizeZ==nothing)
                 0
-            elseif 1(dynamicSharedMemorySize == nothing)
+            elseif 1(dynamicSharedMemorySize==nothing)
                 0
             else
                 1length(kernelOperands)
             end,
-            (asyncObject == nothing) ? 0 : 1,
+            (asyncObject==nothing) ? 0 : 1,
         ]),
     )
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.launch_func",
         location;
         operands,
@@ -1718,13 +1718,13 @@ function launch(
             1,
             1,
             1,
-            if (clusterSizeX == nothing)
+            if (clusterSizeX==nothing)
                 0
-            elseif 1(clusterSizeY == nothing)
+            elseif 1(clusterSizeY==nothing)
                 0
-            elseif 1(clusterSizeZ == nothing)
+            elseif 1(clusterSizeZ==nothing)
                 0
-            elseif 1(dynamicSharedMemorySize == nothing)
+            elseif 1(dynamicSharedMemorySize==nothing)
                 0
             else
                 1
@@ -1736,7 +1736,7 @@ function launch(
     !isnothing(kernelModule) &&
         push!(attributes, namedattribute("kernelModule", kernelModule))
 
-    return create_operation(
+    create_operation(
         "gpu.launch",
         location;
         operands,
@@ -1780,7 +1780,7 @@ function memcpy(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.memcpy",
         location;
         operands,
@@ -1824,7 +1824,7 @@ function memset(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.memset",
         location;
         operands,
@@ -1862,7 +1862,7 @@ function num_subgroups(;
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.num_subgroups",
         location;
         operands,
@@ -1890,7 +1890,7 @@ function printf(args::Vector{Value}; format, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("format", format),]
 
-    return create_operation(
+    create_operation(
         "gpu.printf",
         location;
         operands,
@@ -1916,7 +1916,7 @@ function return_(operands::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.return",
         location;
         operands,
@@ -1971,7 +1971,7 @@ function sddmm_buffer_size(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.sddmm_buffer_size",
         location;
         operands,
@@ -2026,7 +2026,7 @@ function sddmm(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.sddmm",
         location;
         operands,
@@ -2072,7 +2072,7 @@ function set_csr_pointers(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.set_csr_pointers",
         location;
         operands,
@@ -2098,7 +2098,7 @@ function set_default_device(devIndex::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.set_default_device",
         location;
         operands,
@@ -2178,7 +2178,7 @@ function shuffle(
     !isnothing(shuffleResult) && push!(op_ty_results, shuffleResult)
     !isnothing(valid) && push!(op_ty_results, valid)
 
-    return create_operation(
+    create_operation(
         "gpu.shuffle",
         location;
         operands,
@@ -2231,7 +2231,7 @@ function spgemm_copy(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.spgemm_copy",
         location;
         operands,
@@ -2274,7 +2274,7 @@ function spgemm_create_descr(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.spgemm_create_descr",
         location;
         operands,
@@ -2314,7 +2314,7 @@ function spgemm_destroy_descr(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.spgemm_destroy_descr",
         location;
         operands,
@@ -2382,7 +2382,7 @@ function spgemm_work_estimation_or_compute(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.spgemm_work_estimation_or_compute",
         location;
         operands,
@@ -2437,7 +2437,7 @@ function spmm_buffer_size(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.spmm_buffer_size",
         location;
         operands,
@@ -2496,7 +2496,7 @@ function spmm(
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
     !isnothing(modeB) && push!(attributes, namedattribute("modeB", modeB))
 
-    return create_operation(
+    create_operation(
         "gpu.spmm",
         location;
         operands,
@@ -2549,7 +2549,7 @@ function spmv_buffer_size(
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
 
-    return create_operation(
+    create_operation(
         "gpu.spmv_buffer_size",
         location;
         operands,
@@ -2602,7 +2602,7 @@ function spmv(
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
     !isnothing(modeA) && push!(attributes, namedattribute("modeA", modeA))
 
-    return create_operation(
+    create_operation(
         "gpu.spmv",
         location;
         operands,
@@ -2646,7 +2646,7 @@ function spmat_get_size(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.spmat_get_size",
         location;
         operands,
@@ -2685,7 +2685,7 @@ function subgroup_id(;
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_id",
         location;
         operands,
@@ -2746,7 +2746,7 @@ function subgroup_mma_compute(
     !isnothing(a_transpose) && push!(attributes, namedattribute("a_transpose", a_transpose))
     !isnothing(b_transpose) && push!(attributes, namedattribute("b_transpose", b_transpose))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_mma_compute",
         location;
         operands,
@@ -2788,7 +2788,7 @@ function subgroup_mma_constant_matrix(value::Value; res::IR.Type, location=Locat
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_mma_constant_matrix",
         location;
         operands,
@@ -2829,7 +2829,7 @@ function subgroup_mma_elementwise(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("opType", opType),]
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_mma_elementwise",
         location;
         operands,
@@ -2884,7 +2884,7 @@ function subgroup_mma_load_matrix(
     attributes = NamedAttribute[namedattribute("leadDimension", leadDimension),]
     !isnothing(transpose) && push!(attributes, namedattribute("transpose", transpose))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_mma_load_matrix",
         location;
         operands,
@@ -2934,7 +2934,7 @@ function subgroup_mma_store_matrix(
     attributes = NamedAttribute[namedattribute("leadDimension", leadDimension),]
     !isnothing(transpose) && push!(attributes, namedattribute("transpose", transpose))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_mma_store_matrix",
         location;
         operands,
@@ -3001,7 +3001,7 @@ function subgroup_reduce(
     !isnothing(cluster_stride) &&
         push!(attributes, namedattribute("cluster_stride", cluster_stride))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_reduce",
         location;
         operands,
@@ -3040,7 +3040,7 @@ function subgroup_size(;
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.subgroup_size",
         location;
         operands,
@@ -3066,7 +3066,7 @@ function terminator(; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.terminator",
         location;
         operands,
@@ -3110,7 +3110,7 @@ function thread_id(;
     !isnothing(result_0) && push!(op_ty_results, result_0)
     !isnothing(upper_bound) && push!(attributes, namedattribute("upper_bound", upper_bound))
 
-    return create_operation(
+    create_operation(
         "gpu.thread_id",
         location;
         operands,
@@ -3167,7 +3167,7 @@ function wait(
     attributes = NamedAttribute[]
     !isnothing(asyncToken) && push!(op_ty_results, asyncToken)
 
-    return create_operation(
+    create_operation(
         "gpu.wait",
         location;
         operands,
@@ -3295,7 +3295,7 @@ function warp_execute_on_lane_0(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("warp_size", warp_size),]
 
-    return create_operation(
+    create_operation(
         "gpu.warp_execute_on_lane_0",
         location;
         operands,
@@ -3326,7 +3326,7 @@ function yield(values::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "gpu.yield",
         location;
         operands,
