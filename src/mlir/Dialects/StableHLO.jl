@@ -35,7 +35,7 @@ function abs(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=Lo
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.abs",
         location;
         operands,
@@ -71,7 +71,7 @@ function add(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.add",
         location;
         operands,
@@ -107,7 +107,7 @@ function after_all(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.after_all",
         location;
         operands,
@@ -160,7 +160,7 @@ function all_gather(
     !isnothing(use_global_device_ids) &&
         push!(attributes, namedattribute("use_global_device_ids", use_global_device_ids))
 
-    return create_operation(
+    create_operation(
         "stablehlo.all_gather",
         location;
         operands,
@@ -213,7 +213,7 @@ function all_reduce(
     !isnothing(use_global_device_ids) &&
         push!(attributes, namedattribute("use_global_device_ids", use_global_device_ids))
 
-    return create_operation(
+    create_operation(
         "stablehlo.all_reduce",
         location;
         operands,
@@ -270,7 +270,7 @@ function all_to_all(
     !isnothing(channel_handle) &&
         push!(attributes, namedattribute("channel_handle", channel_handle))
 
-    return create_operation(
+    create_operation(
         "stablehlo.all_to_all",
         location;
         operands,
@@ -306,7 +306,7 @@ function and(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.and",
         location;
         operands,
@@ -342,7 +342,7 @@ function atan2(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.atan2",
         location;
         operands,
@@ -398,7 +398,7 @@ function batch_norm_grad(
     !isnothing(grad_scale) && push!(op_ty_results, grad_scale)
     !isnothing(grad_offset) && push!(op_ty_results, grad_offset)
 
-    return create_operation(
+    create_operation(
         "stablehlo.batch_norm_grad",
         location;
         operands,
@@ -447,7 +447,7 @@ function batch_norm_inference(
     ]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.batch_norm_inference",
         location;
         operands,
@@ -500,7 +500,7 @@ function batch_norm_training(
     !isnothing(batch_mean) && push!(op_ty_results, batch_mean)
     !isnothing(batch_var) && push!(op_ty_results, batch_var)
 
-    return create_operation(
+    create_operation(
         "stablehlo.batch_norm_training",
         location;
         operands,
@@ -534,7 +534,7 @@ function bitcast_convert(operand::Value; result_0::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.bitcast_convert",
         location;
         operands,
@@ -571,7 +571,7 @@ function broadcast_in_dim(
         "broadcast_dimensions", broadcast_dimensions
     ),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.broadcast_in_dim",
         location;
         operands,
@@ -610,7 +610,7 @@ function broadcast(
     attributes = NamedAttribute[namedattribute("broadcast_sizes", broadcast_sizes),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.broadcast",
         location;
         operands,
@@ -649,7 +649,7 @@ function case(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.case",
         location;
         operands,
@@ -690,7 +690,7 @@ function cbrt(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.cbrt",
         location;
         operands,
@@ -723,7 +723,7 @@ function ceil(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=L
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.ceil",
         location;
         operands,
@@ -759,7 +759,7 @@ function cholesky(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(lower) && push!(attributes, namedattribute("lower", lower))
 
-    return create_operation(
+    create_operation(
         "stablehlo.cholesky",
         location;
         operands,
@@ -799,7 +799,7 @@ function clamp(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.clamp",
         location;
         operands,
@@ -835,7 +835,7 @@ function count_leading_zeros(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.count_leading_zeros",
         location;
         operands,
@@ -881,7 +881,7 @@ function collective_broadcast(
     !isnothing(channel_handle) &&
         push!(attributes, namedattribute("channel_handle", channel_handle))
 
-    return create_operation(
+    create_operation(
         "stablehlo.collective_broadcast",
         location;
         operands,
@@ -927,7 +927,7 @@ function collective_permute(
     !isnothing(channel_handle) &&
         push!(attributes, namedattribute("channel_handle", channel_handle))
 
-    return create_operation(
+    create_operation(
         "stablehlo.collective_permute",
         location;
         operands,
@@ -972,7 +972,7 @@ function compare(
     !isnothing(compare_type) &&
         push!(attributes, namedattribute("compare_type", compare_type))
 
-    return create_operation(
+    create_operation(
         "stablehlo.compare",
         location;
         operands,
@@ -1006,7 +1006,7 @@ function complex(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.complex",
         location;
         operands,
@@ -1065,7 +1065,7 @@ function composite(
         push!(attributes, namedattribute("composite_attributes", composite_attributes))
     !isnothing(version) && push!(attributes, namedattribute("version", version))
 
-    return create_operation(
+    create_operation(
         "stablehlo.composite",
         location;
         operands,
@@ -1105,7 +1105,7 @@ function concatenate(
     attributes = NamedAttribute[namedattribute("dimension", dimension),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.concatenate",
         location;
         operands,
@@ -1138,7 +1138,7 @@ function constant(; output=nothing::Union{Nothing,IR.Type}, value, location=Loca
     attributes = NamedAttribute[namedattribute("value", value),]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "stablehlo.constant",
         location;
         operands,
@@ -1171,7 +1171,7 @@ function convert(operand::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.convert",
         location;
         operands,
@@ -1246,7 +1246,7 @@ function convolution(
     !isnothing(precision_config) &&
         push!(attributes, namedattribute("precision_config", precision_config))
 
-    return create_operation(
+    create_operation(
         "stablehlo.convolution",
         location;
         operands,
@@ -1287,7 +1287,7 @@ function cosine(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.cosine",
         location;
         operands,
@@ -1321,7 +1321,7 @@ function create_token(; output=nothing::Union{Nothing,IR.Type}, location=Locatio
     attributes = NamedAttribute[]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "stablehlo.create_token",
         location;
         operands,
@@ -1364,7 +1364,7 @@ function cross_replica_sum(
     attributes = NamedAttribute[namedattribute("replica_groups", replica_groups),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.cross-replica-sum",
         location;
         operands,
@@ -1431,7 +1431,7 @@ function custom_call(
     !isnothing(output_operand_aliases) &&
         push!(attributes, namedattribute("output_operand_aliases", output_operand_aliases))
 
-    return create_operation(
+    create_operation(
         "stablehlo.custom_call",
         location;
         operands,
@@ -1467,7 +1467,7 @@ function divide(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.divide",
         location;
         operands,
@@ -1518,7 +1518,7 @@ function dot_general(
         push!(attributes, namedattribute("precision_config", precision_config))
     !isnothing(algorithm) && push!(attributes, namedattribute("algorithm", algorithm))
 
-    return create_operation(
+    create_operation(
         "stablehlo.dot_general",
         location;
         operands,
@@ -1555,7 +1555,7 @@ function dot(
     !isnothing(precision_config) &&
         push!(attributes, namedattribute("precision_config", precision_config))
 
-    return create_operation(
+    create_operation(
         "stablehlo.dot",
         location;
         operands,
@@ -1618,7 +1618,7 @@ function dynamic_broadcast_in_dim(
         namedattribute("known_nonexpanding_dimensions", known_nonexpanding_dimensions),
     )
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_broadcast_in_dim",
         location;
         operands,
@@ -1687,7 +1687,7 @@ function dynamic_conv(
     !isnothing(precision_config) &&
         push!(attributes, namedattribute("precision_config", precision_config))
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_conv",
         location;
         operands,
@@ -1737,7 +1737,7 @@ function dynamic_gather(
     !isnothing(indices_are_sorted) &&
         push!(attributes, namedattribute("indices_are_sorted", indices_are_sorted))
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_gather",
         location;
         operands,
@@ -1774,7 +1774,7 @@ function dynamic_iota(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("iota_dimension", iota_dimension),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_iota",
         location;
         operands,
@@ -1824,7 +1824,7 @@ function dynamic_pad(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_pad",
         location;
         operands,
@@ -1861,7 +1861,7 @@ function dynamic_reshape(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_reshape",
         location;
         operands,
@@ -1902,7 +1902,7 @@ function dynamic_slice(
     attributes = NamedAttribute[namedattribute("slice_sizes", slice_sizes),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_slice",
         location;
         operands,
@@ -1944,7 +1944,7 @@ function dynamic_update_slice(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.dynamic_update_slice",
         location;
         operands,
@@ -1981,7 +1981,7 @@ function einsum(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("einsum_config", einsum_config),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.einsum",
         location;
         operands,
@@ -2022,7 +2022,7 @@ function exponential(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.exponential",
         location;
         operands,
@@ -2063,7 +2063,7 @@ function exponential_minus_one(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.exponential_minus_one",
         location;
         operands,
@@ -2105,7 +2105,7 @@ function fft(
     ]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.fft",
         location;
         operands,
@@ -2139,7 +2139,7 @@ function floor(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.floor",
         location;
         operands,
@@ -2196,7 +2196,7 @@ function gather(
     !isnothing(indices_are_sorted) &&
         push!(attributes, namedattribute("indices_are_sorted", indices_are_sorted))
 
-    return create_operation(
+    create_operation(
         "stablehlo.gather",
         location;
         operands,
@@ -2231,7 +2231,7 @@ function get_dimension_size(
     attributes = NamedAttribute[namedattribute("dimension", dimension),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.get_dimension_size",
         location;
         operands,
@@ -2267,7 +2267,7 @@ function get_tuple_element(
     attributes = NamedAttribute[namedattribute("index", index),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.get_tuple_element",
         location;
         operands,
@@ -2308,7 +2308,7 @@ function if_(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.if",
         location;
         operands,
@@ -2342,7 +2342,7 @@ function imag(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=L
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.imag",
         location;
         operands,
@@ -2384,7 +2384,7 @@ function infeed(
         push!(attributes, namedattribute("infeed_config", infeed_config))
     !isnothing(layout) && push!(attributes, namedattribute("layout", layout))
 
-    return create_operation(
+    create_operation(
         "stablehlo.infeed",
         location;
         operands,
@@ -2417,7 +2417,7 @@ function iota(; output::IR.Type, iota_dimension, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("iota_dimension", iota_dimension),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.iota",
         location;
         operands,
@@ -2451,7 +2451,7 @@ function is_finite(x::Value; y=nothing::Union{Nothing,IR.Type}, location=Locatio
     attributes = NamedAttribute[]
     !isnothing(y) && push!(op_ty_results, y)
 
-    return create_operation(
+    create_operation(
         "stablehlo.is_finite",
         location;
         operands,
@@ -2492,7 +2492,7 @@ function log_plus_one(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.log_plus_one",
         location;
         operands,
@@ -2533,7 +2533,7 @@ function log(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.log",
         location;
         operands,
@@ -2574,7 +2574,7 @@ function logistic(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.logistic",
         location;
         operands,
@@ -2619,7 +2619,7 @@ function map(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("dimensions", dimensions),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.map",
         location;
         operands,
@@ -2655,7 +2655,7 @@ function maximum(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.maximum",
         location;
         operands,
@@ -2691,7 +2691,7 @@ function minimum(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.minimum",
         location;
         operands,
@@ -2727,7 +2727,7 @@ function multiply(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.multiply",
         location;
         operands,
@@ -2761,7 +2761,7 @@ function negate(operand::Value; result=nothing::Union{Nothing,IR.Type}, location
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.negate",
         location;
         operands,
@@ -2795,7 +2795,7 @@ function not(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=Lo
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.not",
         location;
         operands,
@@ -2835,7 +2835,7 @@ function optimization_barrier(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result...)
 
-    return create_operation(
+    create_operation(
         "stablehlo.optimization_barrier",
         location;
         operands,
@@ -2871,7 +2871,7 @@ function or(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.or",
         location;
         operands,
@@ -2913,7 +2913,7 @@ function outfeed(
     !isnothing(outfeed_config) &&
         push!(attributes, namedattribute("outfeed_config", outfeed_config))
 
-    return create_operation(
+    create_operation(
         "stablehlo.outfeed",
         location;
         operands,
@@ -2960,7 +2960,7 @@ function pad(
     ]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.pad",
         location;
         operands,
@@ -2993,7 +2993,7 @@ function partition_id(; result_0=nothing::Union{Nothing,IR.Type}, location=Locat
     attributes = NamedAttribute[]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.partition_id",
         location;
         operands,
@@ -3027,7 +3027,7 @@ function popcnt(operand::Value; result=nothing::Union{Nothing,IR.Type}, location
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.popcnt",
         location;
         operands,
@@ -3063,7 +3063,7 @@ function power(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.power",
         location;
         operands,
@@ -3106,7 +3106,7 @@ function real_dynamic_slice(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.real_dynamic_slice",
         location;
         operands,
@@ -3140,7 +3140,7 @@ function real(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=L
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.real",
         location;
         operands,
@@ -3183,7 +3183,7 @@ function recv(
     !isnothing(is_host_transfer) &&
         push!(attributes, namedattribute("is_host_transfer", is_host_transfer))
 
-    return create_operation(
+    create_operation(
         "stablehlo.recv",
         location;
         operands,
@@ -3229,7 +3229,7 @@ function reduce(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("dimensions", dimensions),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.reduce",
         location;
         operands,
@@ -3273,7 +3273,7 @@ function reduce_precision(
     ]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "stablehlo.reduce_precision",
         location;
         operands,
@@ -3332,7 +3332,7 @@ function reduce_scatter(
     !isnothing(use_global_device_ids) &&
         push!(attributes, namedattribute("use_global_device_ids", use_global_device_ids))
 
-    return create_operation(
+    create_operation(
         "stablehlo.reduce_scatter",
         location;
         operands,
@@ -3393,7 +3393,7 @@ function reduce_window(
         push!(attributes, namedattribute("window_dilations", window_dilations))
     !isnothing(padding) && push!(attributes, namedattribute("padding", padding))
 
-    return create_operation(
+    create_operation(
         "stablehlo.reduce_window",
         location;
         operands,
@@ -3429,7 +3429,7 @@ function remainder(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.remainder",
         location;
         operands,
@@ -3462,7 +3462,7 @@ function replica_id(; result_0=nothing::Union{Nothing,IR.Type}, location=Locatio
     attributes = NamedAttribute[]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.replica_id",
         location;
         operands,
@@ -3494,7 +3494,7 @@ function reshape(operand::Value; result_0::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.reshape",
         location;
         operands,
@@ -3513,7 +3513,7 @@ function return_(results::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.return",
         location;
         operands,
@@ -3549,7 +3549,7 @@ function reverse(
     attributes = NamedAttribute[namedattribute("dimensions", dimensions),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.reverse",
         location;
         operands,
@@ -3589,7 +3589,7 @@ function rng_bit_generator(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("rng_algorithm", rng_algorithm),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.rng_bit_generator",
         location;
         operands,
@@ -3630,7 +3630,7 @@ function rng(
     attributes = NamedAttribute[namedattribute("rng_distribution", rng_distribution),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.rng",
         location;
         operands,
@@ -3667,7 +3667,7 @@ function round_nearest_even(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.round_nearest_even",
         location;
         operands,
@@ -3703,7 +3703,7 @@ function round_nearest_afz(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.round_nearest_afz",
         location;
         operands,
@@ -3745,7 +3745,7 @@ function rsqrt(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.rsqrt",
         location;
         operands,
@@ -3809,7 +3809,7 @@ function scatter(
     !isnothing(unique_indices) &&
         push!(attributes, namedattribute("unique_indices", unique_indices))
 
-    return create_operation(
+    create_operation(
         "stablehlo.scatter",
         location;
         operands,
@@ -3871,7 +3871,7 @@ function select_and_scatter(
         push!(attributes, namedattribute("window_strides", window_strides))
     !isnothing(padding) && push!(attributes, namedattribute("padding", padding))
 
-    return create_operation(
+    create_operation(
         "stablehlo.select_and_scatter",
         location;
         operands,
@@ -3911,7 +3911,7 @@ function select(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.select",
         location;
         operands,
@@ -3956,7 +3956,7 @@ function send(
     !isnothing(is_host_transfer) &&
         push!(attributes, namedattribute("is_host_transfer", is_host_transfer))
 
-    return create_operation(
+    create_operation(
         "stablehlo.send",
         location;
         operands,
@@ -3996,7 +3996,7 @@ function set_dimension_size(
     attributes = NamedAttribute[namedattribute("dimension", dimension),]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.set_dimension_size",
         location;
         operands,
@@ -4032,7 +4032,7 @@ function shift_left(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.shift_left",
         location;
         operands,
@@ -4068,7 +4068,7 @@ function shift_right_arithmetic(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.shift_right_arithmetic",
         location;
         operands,
@@ -4104,7 +4104,7 @@ function shift_right_logical(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.shift_right_logical",
         location;
         operands,
@@ -4138,7 +4138,7 @@ function sign(operand::Value; result=nothing::Union{Nothing,IR.Type}, location=L
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.sign",
         location;
         operands,
@@ -4179,7 +4179,7 @@ function sine(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.sine",
         location;
         operands,
@@ -4235,7 +4235,7 @@ function slice(
     ]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.slice",
         location;
         operands,
@@ -4284,7 +4284,7 @@ function sort(
     !isnothing(dimension) && push!(attributes, namedattribute("dimension", dimension))
     !isnothing(is_stable) && push!(attributes, namedattribute("is_stable", is_stable))
 
-    return create_operation(
+    create_operation(
         "stablehlo.sort",
         location;
         operands,
@@ -4325,7 +4325,7 @@ function sqrt(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.sqrt",
         location;
         operands,
@@ -4361,7 +4361,7 @@ function subtract(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.subtract",
         location;
         operands,
@@ -4402,7 +4402,7 @@ function tan(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.tan",
         location;
         operands,
@@ -4443,7 +4443,7 @@ function tanh(
     !isnothing(result_accuracy) &&
         push!(attributes, namedattribute("result_accuracy", result_accuracy))
 
-    return create_operation(
+    create_operation(
         "stablehlo.tanh",
         location;
         operands,
@@ -4488,7 +4488,7 @@ function torch_index_select(
         namedattribute("dim", dim), namedattribute("batch_dims", batch_dims)
     ]
 
-    return create_operation(
+    create_operation(
         "stablehlo.torch_index_select",
         location;
         operands,
@@ -4524,7 +4524,7 @@ function transpose(
     attributes = NamedAttribute[namedattribute("permutation", permutation),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.transpose",
         location;
         operands,
@@ -4577,7 +4577,7 @@ function triangular_solve(
     ]
     !isnothing(result_0) && push!(op_ty_results, result_0)
 
-    return create_operation(
+    create_operation(
         "stablehlo.triangular_solve",
         location;
         operands,
@@ -4612,7 +4612,7 @@ function tuple(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.tuple",
         location;
         operands,
@@ -4647,7 +4647,7 @@ function unary_einsum(operand::Value; result_0::IR.Type, einsum_config, location
     successors = Block[]
     attributes = NamedAttribute[namedattribute("einsum_config", einsum_config),]
 
-    return create_operation(
+    create_operation(
         "stablehlo.unary_einsum",
         location;
         operands,
@@ -4684,7 +4684,7 @@ function uniform_dequantize(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.uniform_dequantize",
         location;
         operands,
@@ -4718,7 +4718,7 @@ function uniform_quantize(operand::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.uniform_quantize",
         location;
         operands,
@@ -4765,7 +4765,7 @@ function while_(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "stablehlo.while",
         location;
         operands,
@@ -4801,7 +4801,7 @@ function xor(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "stablehlo.xor",
         location;
         operands,

@@ -43,7 +43,7 @@ function call(
     !isnothing(arg_attrs) && push!(attributes, namedattribute("arg_attrs", arg_attrs))
     !isnothing(res_attrs) && push!(attributes, namedattribute("res_attrs", res_attrs))
 
-    return create_operation(
+    create_operation(
         "tt.call",
         location;
         operands,
@@ -115,7 +115,7 @@ function func(;
     !isnothing(arg_attrs) && push!(attributes, namedattribute("arg_attrs", arg_attrs))
     !isnothing(res_attrs) && push!(attributes, namedattribute("res_attrs", res_attrs))
 
-    return create_operation(
+    create_operation(
         "tt.func",
         location;
         operands,
@@ -140,7 +140,7 @@ function reinterpret_tensor_descriptor(rawDesc::Value; result::IR.Type, location
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.reinterpret_tensor_descriptor",
         location;
         operands,
@@ -176,7 +176,7 @@ function return_(srcs::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.return",
         location;
         operands,
@@ -195,7 +195,7 @@ function addptr(ptr::Value, offset::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.addptr",
         location;
         operands,
@@ -214,7 +214,7 @@ function advance(ptr::Value, offsets::Vector{Value}; result::IR.Type, location=L
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.advance",
         location;
         operands,
@@ -239,7 +239,7 @@ function assert(condition::Value; message, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("message", message),]
 
-    return create_operation(
+    create_operation(
         "tt.assert",
         location;
         operands,
@@ -271,7 +271,7 @@ function atomic_cas(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("sem", sem), namedattribute("scope", scope)]
 
-    return create_operation(
+    create_operation(
         "tt.atomic_cas",
         location;
         operands,
@@ -311,7 +311,7 @@ function atomic_rmw(
     ]
     !isnothing(mask) && push!(operands, mask)
 
-    return create_operation(
+    create_operation(
         "tt.atomic_rmw",
         location;
         operands,
@@ -330,7 +330,7 @@ function bitcast(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.bitcast",
         location;
         operands,
@@ -356,7 +356,7 @@ function broadcast(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.broadcast",
         location;
         operands,
@@ -375,7 +375,7 @@ function cat(lhs::Value, rhs::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.cat",
         location;
         operands,
@@ -409,7 +409,7 @@ function clampf(
     attributes = NamedAttribute[namedattribute("propagateNan", propagateNan),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.clampf",
         location;
         operands,
@@ -443,7 +443,7 @@ function descriptor_gather(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.descriptor_gather",
         location;
         operands,
@@ -481,7 +481,7 @@ function descriptor_load(
     !isnothing(cache) && push!(attributes, namedattribute("cache", cache))
     !isnothing(evict) && push!(attributes, namedattribute("evict", evict))
 
-    return create_operation(
+    create_operation(
         "tt.descriptor_load",
         location;
         operands,
@@ -502,7 +502,7 @@ function descriptor_scatter(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.descriptor_scatter",
         location;
         operands,
@@ -533,7 +533,7 @@ function descriptor_store(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.descriptor_store",
         location;
         operands,
@@ -575,7 +575,7 @@ function dot(
     !isnothing(maxNumImpreciseAcc) &&
         push!(attributes, namedattribute("maxNumImpreciseAcc", maxNumImpreciseAcc))
 
-    return create_operation(
+    create_operation(
         "tt.dot",
         location;
         operands,
@@ -620,16 +620,16 @@ function dot_scaled(
         1,
         1,
         1,
-        if (a_scale == nothing)
+        if (a_scale==nothing)
             0
-        elseif 1(b_scale == nothing)
+        elseif 1(b_scale==nothing)
             0
         else
             1
         end,
     ]))
 
-    return create_operation(
+    create_operation(
         "tt.dot_scaled",
         location;
         operands,
@@ -669,7 +669,7 @@ function elementwise_inline_asm(
         namedattribute("packed_element", packed_element),
     ]
 
-    return create_operation(
+    create_operation(
         "tt.elementwise_inline_asm",
         location;
         operands,
@@ -691,7 +691,7 @@ function expand_dims(
     attributes = NamedAttribute[namedattribute("axis", axis),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.expand_dims",
         location;
         operands,
@@ -745,7 +745,7 @@ function experimental_tensormap_create(
         ]),
     )
 
-    return create_operation(
+    create_operation(
         "tt.experimental_tensormap_create",
         location;
         operands,
@@ -764,7 +764,7 @@ function experimental_tensormap_fenceproxy_acquire(desc_ptr::Value; location=Loc
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.experimental_tensormap_fenceproxy_acquire",
         location;
         operands,
@@ -802,7 +802,7 @@ function extern_elementwise(
         namedattribute("pure", pure),
     ]
 
-    return create_operation(
+    create_operation(
         "tt.extern_elementwise",
         location;
         operands,
@@ -829,7 +829,7 @@ function fp_to_fp(src::Value; result::IR.Type, rounding=nothing, location=Locati
     attributes = NamedAttribute[]
     !isnothing(rounding) && push!(attributes, namedattribute("rounding", rounding))
 
-    return create_operation(
+    create_operation(
         "tt.fp_to_fp",
         location;
         operands,
@@ -872,7 +872,7 @@ function gather(
     !isnothing(efficient_layout) &&
         push!(attributes, namedattribute("efficient_layout", efficient_layout))
 
-    return create_operation(
+    create_operation(
         "tt.gather",
         location;
         operands,
@@ -894,7 +894,7 @@ function get_num_programs(;
     attributes = NamedAttribute[namedattribute("axis", axis),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.get_num_programs",
         location;
         operands,
@@ -914,7 +914,7 @@ function get_program_id(; result=nothing::Union{Nothing,IR.Type}, axis, location
     attributes = NamedAttribute[namedattribute("axis", axis),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.get_program_id",
         location;
         operands,
@@ -940,7 +940,7 @@ function histogram(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.histogram",
         location;
         operands,
@@ -959,7 +959,7 @@ function int_to_ptr(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.int_to_ptr",
         location;
         operands,
@@ -987,7 +987,7 @@ function join(lhs::Value, rhs::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.join",
         location;
         operands,
@@ -1020,9 +1020,9 @@ function load(
     !isnothing(other) && push!(operands, other)
     push!(attributes, operandsegmentsizes([
         1,
-        if (mask == nothing)
+        if (mask==nothing)
             0
-        elseif 1(other == nothing)
+        elseif 1(other==nothing)
             0
         else
             1
@@ -1036,7 +1036,7 @@ function load(
     !isnothing(evict) && push!(attributes, namedattribute("evict", evict))
     !isnothing(isVolatile) && push!(attributes, namedattribute("isVolatile", isVolatile))
 
-    return create_operation(
+    create_operation(
         "tt.load",
         location;
         operands,
@@ -1062,7 +1062,7 @@ function make_range(; result::IR.Type, start, end_, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("start", start), namedattribute("end", end_)]
 
-    return create_operation(
+    create_operation(
         "tt.make_range",
         location;
         operands,
@@ -1093,7 +1093,7 @@ function make_tensor_descriptor(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.make_tensor_descriptor",
         location;
         operands,
@@ -1126,7 +1126,7 @@ function make_tensor_ptr(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("order", order),]
 
-    return create_operation(
+    create_operation(
         "tt.make_tensor_ptr",
         location;
         operands,
@@ -1153,7 +1153,7 @@ function mulhiui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.mulhiui",
         location;
         operands,
@@ -1180,7 +1180,7 @@ function precise_divf(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.precise_divf",
         location;
         operands,
@@ -1205,7 +1205,7 @@ function precise_sqrt(x::Value; result=nothing::Union{Nothing,IR.Type}, location
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.precise_sqrt",
         location;
         operands,
@@ -1234,7 +1234,7 @@ function print(args::Vector{Value}; prefix, hex, isSigned, location=Location())
         namedattribute("isSigned", isSigned),
     ]
 
-    return create_operation(
+    create_operation(
         "tt.print",
         location;
         operands,
@@ -1253,7 +1253,7 @@ function ptr_to_int(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.ptr_to_int",
         location;
         operands,
@@ -1278,7 +1278,7 @@ function reduce(
     successors = Block[]
     attributes = NamedAttribute[namedattribute("axis", axis),]
 
-    return create_operation(
+    create_operation(
         "tt.reduce",
         location;
         operands,
@@ -1297,7 +1297,7 @@ function reduce_return(result::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.reduce.return",
         location;
         operands,
@@ -1337,7 +1337,7 @@ function reshape(
     !isnothing(efficient_layout) &&
         push!(attributes, namedattribute("efficient_layout", efficient_layout))
 
-    return create_operation(
+    create_operation(
         "tt.reshape",
         location;
         operands,
@@ -1365,7 +1365,7 @@ function scan(
         namedattribute("axis", axis), namedattribute("reverse", reverse)
     ]
 
-    return create_operation(
+    create_operation(
         "tt.scan",
         location;
         operands,
@@ -1384,7 +1384,7 @@ function scan_return(result::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.scan.return",
         location;
         operands,
@@ -1403,7 +1403,7 @@ function splat(src::Value; result::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "tt.splat",
         location;
         operands,
@@ -1438,7 +1438,7 @@ function split(
     !isnothing(outLHS) && push!(op_ty_results, outLHS)
     !isnothing(outRHS) && push!(op_ty_results, outRHS)
 
-    return create_operation(
+    create_operation(
         "tt.split",
         location;
         operands,
@@ -1470,7 +1470,7 @@ function store(
     !isnothing(cache) && push!(attributes, namedattribute("cache", cache))
     !isnothing(evict) && push!(attributes, namedattribute("evict", evict))
 
-    return create_operation(
+    create_operation(
         "tt.store",
         location;
         operands,
@@ -1521,7 +1521,7 @@ function trans(
     attributes = NamedAttribute[namedattribute("order", order),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "tt.trans",
         location;
         operands,

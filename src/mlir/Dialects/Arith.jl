@@ -52,7 +52,7 @@ function addf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.addf",
         location;
         operands,
@@ -114,7 +114,7 @@ function addi(
     !isnothing(overflowFlags) &&
         push!(attributes, namedattribute("overflowFlags", overflowFlags))
 
-    return create_operation(
+    create_operation(
         "arith.addi",
         location;
         operands,
@@ -156,7 +156,7 @@ function addui_extended(
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.addui_extended",
         location;
         operands,
@@ -199,7 +199,7 @@ function andi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.andi",
         location;
         operands,
@@ -219,7 +219,7 @@ value of equal bit width. When operating on vectors, casts elementwise.
 
 Note that this implements a logical bitcast independent of target
 endianness. This allows constant folding without target information and is
-consistent with the bitcast constant folders in LLVM (see
+consitent with the bitcast constant folders in LLVM (see
 https://github.com/llvm/llvm-project/blob/18c19414eb/llvm/lib/IR/ConstantFold.cpp#L168)
 For targets where the source and target type have the same endianness (which
 is the standard), this cast will also change no bits at runtime, but it may
@@ -236,7 +236,7 @@ function bitcast(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.bitcast",
         location;
         operands,
@@ -253,7 +253,7 @@ end
 
 Signed integer division. Rounds towards positive infinity, i.e. `7 / -2 = -3`.
 
-Division by zero, or signed division overflow (minimum value divided by -1) 
+Divison by zero, or signed division overflow (minimum value divided by -1) 
 is undefined behavior. When applied to `vector` and `tensor` values, the 
 behavior is undefined if _any_ of its elements are divided by zero or has a 
 signed division overflow.
@@ -275,7 +275,7 @@ function ceildivsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.ceildivsi",
         location;
         operands,
@@ -315,7 +315,7 @@ function ceildivui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.ceildivui",
         location;
         operands,
@@ -370,7 +370,7 @@ function cmpf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.cmpf",
         location;
         operands,
@@ -419,16 +419,16 @@ main reason being that comparison operations have diverging sets of
 attributes: integers require sign specification while floats require various
 floating point-related particularities, e.g., `-ffast-math` behavior,
 IEEE754 compliance, etc
-([rationale](https://mlir.llvm.org/docs/Rationale/Rationale/#splitting-floating-point-vs-integer-operations)).
+([rationale](../Rationale/Rationale.md#splitting-floating-point-vs-integer-operations)).
 The type of comparison is specified as attribute to avoid introducing ten
 similar operations, taking into account that they are often implemented
 using the same operation downstream
-([rationale](https://mlir.llvm.org/docs/Rationale/Rationale/#specifying-comparison-kind-as-attribute)). The
+([rationale](../Rationale/Rationale.md#specifying-comparison-kind-as-attribute)). The
 separation between signed and unsigned order comparisons is necessary
 because of integers being signless. The comparison operation must know how
 to interpret values with the foremost bit being set: negatives in two\'s
 complement or large positives
-([rationale](https://mlir.llvm.org/docs/Rationale/Rationale/#specifying-sign-in-integer-comparison-operations)).
+([rationale](../Rationale/Rationale.md#specifying-sign-in-integer-comparison-operations)).
 
 # Example
 
@@ -461,7 +461,7 @@ function cmpi(
     attributes = NamedAttribute[namedattribute("predicate", predicate),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.cmpi",
         location;
         operands,
@@ -498,7 +498,7 @@ function constant(; result=nothing::Union{Nothing,IR.Type}, value, location=Loca
     attributes = NamedAttribute[namedattribute("value", value),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.constant",
         location;
         operands,
@@ -525,7 +525,7 @@ function divf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.divf",
         location;
         operands,
@@ -571,7 +571,7 @@ function divsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.divsi",
         location;
         operands,
@@ -617,7 +617,7 @@ function divui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.divui",
         location;
         operands,
@@ -644,7 +644,7 @@ function extf(in::Value; out::IR.Type, fastmath=nothing, location=Location())
     attributes = NamedAttribute[]
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.extf",
         location;
         operands,
@@ -683,7 +683,7 @@ function extsi(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.extsi",
         location;
         operands,
@@ -721,7 +721,7 @@ function extui(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.extui",
         location;
         operands,
@@ -747,7 +747,7 @@ function fptosi(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.fptosi",
         location;
         operands,
@@ -773,7 +773,7 @@ function fptoui(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.fptoui",
         location;
         operands,
@@ -813,7 +813,7 @@ function floordivsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.floordivsi",
         location;
         operands,
@@ -840,7 +840,7 @@ function index_cast(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.index_cast",
         location;
         operands,
@@ -867,7 +867,7 @@ function index_castui(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.index_castui",
         location;
         operands,
@@ -908,7 +908,7 @@ function maxnumf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.maxnumf",
         location;
         operands,
@@ -930,7 +930,7 @@ function maxsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.maxsi",
         location;
         operands,
@@ -952,7 +952,7 @@ function maxui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.maxui",
         location;
         operands,
@@ -992,7 +992,7 @@ function maximumf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.maximumf",
         location;
         operands,
@@ -1033,7 +1033,7 @@ function minnumf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.minnumf",
         location;
         operands,
@@ -1055,7 +1055,7 @@ function minsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.minsi",
         location;
         operands,
@@ -1077,7 +1077,7 @@ function minui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.minui",
         location;
         operands,
@@ -1117,7 +1117,7 @@ function minimumf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.minimumf",
         location;
         operands,
@@ -1168,7 +1168,7 @@ function mulf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.mulf",
         location;
         operands,
@@ -1230,7 +1230,7 @@ function muli(
     !isnothing(overflowFlags) &&
         push!(attributes, namedattribute("overflowFlags", overflowFlags))
 
-    return create_operation(
+    create_operation(
         "arith.muli",
         location;
         operands,
@@ -1278,7 +1278,7 @@ function mulsi_extended(
     !isnothing(low) && push!(op_ty_results, low)
     !isnothing(high) && push!(op_ty_results, high)
 
-    return create_operation(
+    create_operation(
         "arith.mulsi_extended",
         location;
         operands,
@@ -1326,7 +1326,7 @@ function mului_extended(
     !isnothing(low) && push!(op_ty_results, low)
     !isnothing(high) && push!(op_ty_results, high)
 
-    return create_operation(
+    create_operation(
         "arith.mului_extended",
         location;
         operands,
@@ -1373,7 +1373,7 @@ function negf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.negf",
         location;
         operands,
@@ -1416,7 +1416,7 @@ function ori(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.ori",
         location;
         operands,
@@ -1449,7 +1449,7 @@ function remf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.remf",
         location;
         operands,
@@ -1494,7 +1494,7 @@ function remsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.remsi",
         location;
         operands,
@@ -1539,7 +1539,7 @@ function remui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.remui",
         location;
         operands,
@@ -1566,7 +1566,7 @@ function sitofp(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.sitofp",
         location;
         operands,
@@ -1617,7 +1617,7 @@ function shli(
     !isnothing(overflowFlags) &&
         push!(attributes, namedattribute("overflowFlags", overflowFlags))
 
-    return create_operation(
+    create_operation(
         "arith.shli",
         location;
         operands,
@@ -1660,7 +1660,7 @@ function shrsi(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.shrsi",
         location;
         operands,
@@ -1699,7 +1699,7 @@ function shrui(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.shrui",
         location;
         operands,
@@ -1750,7 +1750,7 @@ function subf(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.subf",
         location;
         operands,
@@ -1812,7 +1812,7 @@ function subi(
     !isnothing(overflowFlags) &&
         push!(attributes, namedattribute("overflowFlags", overflowFlags))
 
-    return create_operation(
+    create_operation(
         "arith.subi",
         location;
         operands,
@@ -1845,7 +1845,7 @@ function truncf(
         push!(attributes, namedattribute("roundingmode", roundingmode))
     !isnothing(fastmath) && push!(attributes, namedattribute("fastmath", fastmath))
 
-    return create_operation(
+    create_operation(
         "arith.truncf",
         location;
         operands,
@@ -1882,7 +1882,7 @@ function trunci(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.trunci",
         location;
         operands,
@@ -1909,7 +1909,7 @@ function uitofp(in::Value; out::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "arith.uitofp",
         location;
         operands,
@@ -1952,7 +1952,7 @@ function xori(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.xori",
         location;
         operands,
@@ -2015,7 +2015,7 @@ function select(
     attributes = NamedAttribute[]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "arith.select",
         location;
         operands,

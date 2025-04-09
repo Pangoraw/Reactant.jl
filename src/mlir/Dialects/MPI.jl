@@ -42,7 +42,7 @@ function allreduce(
     attributes = NamedAttribute[namedattribute("op", op),]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.allreduce",
         location;
         operands,
@@ -71,7 +71,7 @@ function barrier(comm::Value; retval=nothing::Union{Nothing,IR.Type}, location=L
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.barrier",
         location;
         operands,
@@ -99,7 +99,7 @@ function comm_rank(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.comm_rank",
         location;
         operands,
@@ -127,7 +127,7 @@ function comm_size(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.comm_size",
         location;
         operands,
@@ -165,7 +165,7 @@ function comm_split(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.comm_split",
         location;
         operands,
@@ -189,7 +189,7 @@ function comm_world(; comm::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "mpi.comm_world",
         location;
         operands,
@@ -214,7 +214,7 @@ function error_class(val::Value; errclass::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "mpi.error_class",
         location;
         operands,
@@ -244,7 +244,7 @@ function finalize(; retval=nothing::Union{Nothing,IR.Type}, location=Location())
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.finalize",
         location;
         operands,
@@ -283,7 +283,7 @@ function irecv(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.irecv",
         location;
         operands,
@@ -322,7 +322,7 @@ function isend(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.isend",
         location;
         operands,
@@ -353,7 +353,7 @@ function init(; retval=nothing::Union{Nothing,IR.Type}, location=Location())
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.init",
         location;
         operands,
@@ -394,7 +394,7 @@ function recv(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.recv",
         location;
         operands,
@@ -419,7 +419,7 @@ function retval_check(val::Value; res::IR.Type, errclass, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("errclass", errclass),]
 
-    return create_operation(
+    create_operation(
         "mpi.retval_check",
         location;
         operands,
@@ -456,7 +456,7 @@ function send(
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.send",
         location;
         operands,
@@ -487,7 +487,7 @@ function wait(req::Value; retval=nothing::Union{Nothing,IR.Type}, location=Locat
     attributes = NamedAttribute[]
     !isnothing(retval) && push!(op_ty_results, retval)
 
-    return create_operation(
+    create_operation(
         "mpi.wait",
         location;
         operands,

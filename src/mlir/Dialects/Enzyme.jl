@@ -25,7 +25,7 @@ function addTo(values::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.addTo",
         location;
         operands,
@@ -57,7 +57,7 @@ function autodiff(
     ]
     !isnothing(width) && push!(attributes, namedattribute("width", width))
 
-    return create_operation(
+    create_operation(
         "enzyme.autodiff",
         location;
         operands,
@@ -80,7 +80,7 @@ function batch(
         namedattribute("fn", fn), namedattribute("batch_shape", batch_shape)
     ]
 
-    return create_operation(
+    create_operation(
         "enzyme.batch",
         location;
         operands,
@@ -107,7 +107,7 @@ function broadcast(input::Value; output::IR.Type, shape, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("shape", shape),]
 
-    return create_operation(
+    create_operation(
         "enzyme.broadcast",
         location;
         operands,
@@ -139,7 +139,7 @@ function fwddiff(
     ]
     !isnothing(width) && push!(attributes, namedattribute("width", width))
 
-    return create_operation(
+    create_operation(
         "enzyme.fwddiff",
         location;
         operands,
@@ -175,7 +175,7 @@ function genericAdjoint(
     !isnothing(library_call) &&
         push!(attributes, namedattribute("library_call", library_call))
 
-    return create_operation(
+    create_operation(
         "enzyme.genericAdjoint",
         location;
         operands,
@@ -194,7 +194,7 @@ function get(gradient::Value; result_0::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.get",
         location;
         operands,
@@ -213,7 +213,7 @@ function init(; result_0::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.init",
         location;
         operands,
@@ -232,7 +232,7 @@ function placeholder(; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.placeholder",
         location;
         operands,
@@ -251,7 +251,7 @@ function pop(cache::Value; output::IR.Type, location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.pop",
         location;
         operands,
@@ -270,7 +270,7 @@ function push(cache::Value, value::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.push",
         location;
         operands,
@@ -292,7 +292,7 @@ function sample(
     attributes = NamedAttribute[namedattribute("fn", fn),]
     !isnothing(name) && push!(attributes, namedattribute("name", name))
 
-    return create_operation(
+    create_operation(
         "enzyme.sample",
         location;
         operands,
@@ -311,7 +311,7 @@ function set(gradient::Value, value::Value; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "enzyme.set",
         location;
         operands,

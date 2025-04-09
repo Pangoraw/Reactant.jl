@@ -58,7 +58,7 @@ function all_gather(
     ]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.all_gather",
         location;
         operands,
@@ -99,7 +99,7 @@ function all_reduce(
     ]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.all_reduce",
         location;
         operands,
@@ -157,7 +157,7 @@ function all_slice(
     ]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.all_slice",
         location;
         operands,
@@ -224,7 +224,7 @@ function all_to_all(
     ]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.all_to_all",
         location;
         operands,
@@ -277,7 +277,7 @@ function collective_permute(
     attributes = NamedAttribute[namedattribute("out_sharding", out_sharding),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.collective_permute",
         location;
         operands,
@@ -316,7 +316,7 @@ function constant(; output=nothing::Union{Nothing,IR.Type}, value, location=Loca
     attributes = NamedAttribute[namedattribute("value", value),]
     !isnothing(output) && push!(op_ty_results, output)
 
-    return create_operation(
+    create_operation(
         "sdy.constant",
         location;
         operands,
@@ -398,7 +398,7 @@ function data_flow_edge(
     !isnothing(result) && push!(op_ty_results, result)
     !isnothing(sharding) && push!(attributes, namedattribute("sharding", sharding))
 
-    return create_operation(
+    create_operation(
         "sdy.data_flow_edge",
         location;
         operands,
@@ -447,7 +447,7 @@ function manual_computation(
         namedattribute("manual_axes", manual_axes),
     ]
 
-    return create_operation(
+    create_operation(
         "sdy.manual_computation",
         location;
         operands,
@@ -476,7 +476,7 @@ function mesh(; sym_name, mesh, location=Location())
         namedattribute("sym_name", sym_name), namedattribute("mesh", mesh)
     ]
 
-    return create_operation(
+    create_operation(
         "sdy.mesh",
         location;
         operands,
@@ -529,7 +529,7 @@ function named_computation(
     !isnothing(out_shardings) &&
         push!(attributes, namedattribute("out_shardings", out_shardings))
 
-    return create_operation(
+    create_operation(
         "sdy.named_computation",
         location;
         operands,
@@ -569,7 +569,7 @@ function propagation_barrier(
     attributes = NamedAttribute[namedattribute("allowed_direction", allowed_direction),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.propagation_barrier",
         location;
         operands,
@@ -609,7 +609,7 @@ function reshard(
     attributes = NamedAttribute[namedattribute("sharding", sharding),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.reshard",
         location;
         operands,
@@ -628,7 +628,7 @@ function return_(results::Vector{Value}; location=Location())
     successors = Block[]
     attributes = NamedAttribute[]
 
-    return create_operation(
+    create_operation(
         "sdy.return",
         location;
         operands,
@@ -668,7 +668,7 @@ function sharding_constraint(
     attributes = NamedAttribute[namedattribute("sharding", sharding),]
     !isnothing(result) && push!(op_ty_results, result)
 
-    return create_operation(
+    create_operation(
         "sdy.sharding_constraint",
         location;
         operands,
@@ -698,7 +698,7 @@ function sharding_group(input::Value; group_id, location=Location())
     successors = Block[]
     attributes = NamedAttribute[namedattribute("group_id", group_id),]
 
-    return create_operation(
+    create_operation(
         "sdy.sharding_group",
         location;
         operands,
