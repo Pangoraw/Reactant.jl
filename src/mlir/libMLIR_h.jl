@@ -17418,6 +17418,12 @@ function ArrayFromHostBuffer(client, data, ptype, dim, cshape, device)
     )::Ptr{PjRtBuffer}
 end
 
+function BufferToHost(buffer, data)
+    @ccall Reactant_jll.libReactantExtra.BufferToHost(
+        buffer::Ptr{PjRtBuffer}, data::Ptr{Cvoid}
+    )::Cvoid
+end
+
 function CopyToBuffer(client, buffer, data, offset, size, bufferP)
     @ccall Reactant_jll.libReactantExtra.CopyToBuffer(
         client::Ptr{PjRtClient},
@@ -17426,12 +17432,6 @@ function CopyToBuffer(client, buffer, data, offset, size, bufferP)
         offset::Csize_t,
         size::Csize_t,
         bufferP::Ptr{Ptr{PjRtBuffer}},
-    )::Cvoid
-end
-
-function BufferToHost(buffer, data)
-    @ccall Reactant_jll.libReactantExtra.BufferToHost(
-        buffer::Ptr{PjRtBuffer}, data::Ptr{Cvoid}
     )::Cvoid
 end
 
